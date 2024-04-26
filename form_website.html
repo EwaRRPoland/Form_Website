@@ -7,12 +7,36 @@
 
     <style>
       body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /*height: 100vh;
+        margin: 0;*/
         /* sets the background as a gradient */
         background: linear-gradient(
           to right,
           rgb(133, 133, 233),
           rgb(240, 242, 243)
         );
+      }
+      /* style for HTML elements with the .button class */
+      .button {
+        /* sets the width 150 and height of the button to 50 pixels */
+        width: 150px;
+        height: 50px;
+        /* sets the font size to 25 pixels */
+        font-size: 20px;
+        /* adds a margin of 2 pixels around the button */
+        margin: 2px;
+        /* changes the cursor to a pointer -hand with pointing finger- when the user hovers over the button */
+        cursor: pointer;
+        /* rounds the corners of the buttons */
+        border-radius: 10px;
+        /* changes the background color of the button to red when hovered */
+        transition: background-color 0.3s ease;
+      }
+      .button:hover {
+        background-color: rgb(87, 76, 194);
       }
     </style>
   </head>
@@ -35,7 +59,7 @@
         <input type="tel" id="telefon" name="telefon" />
       </p>
       <p>
-        <button type="submit">Zatwierdź</button>
+        <button class="button" onclick="submit">Zatwierdź</button>
       </p>
     </form>
     <script type="text/javascript"></script>
