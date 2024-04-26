@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title></title>
-    <meta name="description" content="Form on the Website" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form with cookies</title>
+
     <style>
-      
       body {
-        
         /* sets the background as a gradient */
         background: linear-gradient(
           to right,
@@ -15,16 +14,30 @@
           rgb(240, 242, 243)
         );
       }
-      
-  
     </style>
   </head>
   <body>
-    
-    </div>
-    <script type="text/javascript">
-     
-  
-    </script>
+    <form id="myForm">
+      <p>
+        <label for="imie">Imię:</label>
+        <input type="text" id="imie" name="imie" />
+      </p>
+      <p>
+        <label for="nazwisko">Nazwisko:</label>
+        <input type="text" id="nazwisko" name="nazwisko" />
+      </p>
+      <p>
+        <label for="stanowisko">Stanowisko:</label>
+        <input type="text" id="nazwisko" name="nazwisko" />
+      </p>
+      <p>
+        <label for="telefon">Numer telefonu:</label>
+        <input type="tel" id="telefon" name="telefon" />
+      </p>
+      <p>
+        <button type="submit">Zatwierdź</button>
+      </p>
+    </form>
+    <script type="text/javascript"></script>
   </body>
 </html>
