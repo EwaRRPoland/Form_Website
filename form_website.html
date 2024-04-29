@@ -3,15 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Form with cookies</title>
+    <title>Form with list</title>
 
     <style>
       body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        /*height: 100vh;
-        margin: 0;*/
         /* sets the background as a gradient */
         background: linear-gradient(
           to right,
@@ -41,27 +36,46 @@
     </style>
   </head>
   <body>
-    <form id="myForm">
+    <h1>Form for adding people:</h1>
+    <form id="personForm">
+      <label for="firstName">Imię:</label>
+      <input type="text" id="firstName" name="firstName" required />
+      <br />
+      <br />
+      <label for="lastName">Nazwisko:</label>
+      <input type="text" id="lastName" name="lastName" required />
+      <br />
+      <br />
+      <label for="position">Stanowisko:</label>
+      <input type="text" id="position" name="position" required />
+      <br />
+      <br />
+      <label for="phone">Numer telefonu:</label>
+      <input type="tel" id="phone" name="phone" required />
+      <br />
+      <br />
       <p>
-        <label for="imie">Imię:</label>
-        <input type="text" id="imie" name="imie" />
-      </p>
-      <p>
-        <label for="nazwisko">Nazwisko:</label>
-        <input type="text" id="nazwisko" name="nazwisko" />
-      </p>
-      <p>
-        <label for="stanowisko">Stanowisko:</label>
-        <input type="text" id="nazwisko" name="nazwisko" />
-      </p>
-      <p>
-        <label for="telefon">Numer telefonu:</label>
-        <input type="tel" id="telefon" name="telefon" />
-      </p>
-      <p>
-        <button class="button" onclick="submit">Zatwierdź</button>
+        <button class="button" onclick="submit">Add an employee</button>
       </p>
     </form>
-    <script type="text/javascript"></script>
+    <h2>List of added people:</h2>
+    <ul id="personList"></ul>
+    <script>
+      const form = document.getElementById("personForm"); // Znajdowanie formularza
+      const personList = document.getElementById("personList"); // Znajdowanie listy osób
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault(); // Zapobiegamy domyślnej akcji formularza (np. przeładowania strony)
+        const firstName = document.getElementById("firstName").value; // Pobieranie wartości pola "Imię"
+        const lastName = document.getElementById("lastName").value; // Pobieranie wartości pola "Nazwisko"
+        const position = document.getElementById("position").value; // Pobieranie wartości pola "Stanowisko"
+        const phone = document.getElementById("phone").value; // Pobieranie wartości pola "Numer telefonu"
+        const theEntireLineOfTheList = `${firstName} ${lastName} ${position} ${phone}`; // Tworzenie pełnego wiersza listy
+        const listItem = document.createElement("li"); // Tworzenie elementu listy
+        listItem.textContent = theEntireLineOfTheList; // Ustawienie tekstu elementu listy na pełne dane pracownika
+        personList.appendChild(listItem); // Dodawanie elementu listy do listy osób
+        form.reset(); // Czyszczenie formularza
+      });
+    </script>
   </body>
 </html>
