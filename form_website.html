@@ -64,12 +64,29 @@
       const form = document.getElementById("personForm"); // Znajdowanie formularza
       const personList = document.getElementById("personList"); // Znajdowanie listy osób
 
+      // Tworzenie pustej tablicy do przechowywania obiektów-pracowników
+      let arrayEmployees = [];
+
       form.addEventListener("submit", (event) => {
         event.preventDefault(); // Zapobiegamy domyślnej akcji formularza (np. przeładowania strony)
         const firstName = document.getElementById("firstName").value; // Pobieranie wartości pola "Imię"
         const lastName = document.getElementById("lastName").value; // Pobieranie wartości pola "Nazwisko"
         const position = document.getElementById("position").value; // Pobieranie wartości pola "Stanowisko"
         const phone = document.getElementById("phone").value; // Pobieranie wartości pola "Numer telefonu"
+
+        // Tworzenie obiektu pracownika
+        let employee = {
+          imie: firstName,
+          nazwisko: lastName,
+          stanowisko: position,
+          telefon: phone,
+        };
+
+        // Dodawanie obiektu pracownika do listy
+        arrayEmployees.push(employee);
+        //sprawdzam sobie w konsoli
+        console.log(arrayEmployees);
+
         const theEntireLineOfTheList = `${firstName} ${lastName} ${position} ${phone}`; // Tworzenie pełnego wiersza listy
         const listItem = document.createElement("li"); // Tworzenie elementu listy
         listItem.textContent = theEntireLineOfTheList; // Ustawienie tekstu elementu listy na pełne dane pracownika
