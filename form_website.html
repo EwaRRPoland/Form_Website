@@ -84,13 +84,25 @@
 
         // Dodawanie obiektu pracownika do listy
         arrayEmployees.push(employee);
+
         //sprawdzam sobie w konsoli
         console.log(arrayEmployees);
 
-        const theEntireLineOfTheList = `${firstName} ${lastName} ${position} ${phone}`; // Tworzenie pełnego wiersza listy
-        const listItem = document.createElement("li"); // Tworzenie elementu listy
-        listItem.textContent = theEntireLineOfTheList; // Ustawienie tekstu elementu listy na pełne dane pracownika
-        personList.appendChild(listItem); // Dodawanie elementu listy do listy osób
+        // Sortowanie listy pracowników alfabetycznie po nazwisku
+        arrayEmployees.sort((a, b) => a.nazwisko.localeCompare(b.nazwisko));
+
+        // Czyszczenie listy osób na stronie
+        personList.innerHTML = "";
+
+        // Dodawanie posortowanych pracowników do listy na stronie
+        //pętla forEach przechodzi przez posortowaną liste pracowników, co aktualizuje na nowo listę
+        arrayEmployees.forEach((employee) => {
+          const theEntireLineOfTheList = `${employee.imie} ${employee.nazwisko} ${employee.stanowisko} ${employee.telefon}`;
+          // Tworzenie pełnego wiersza listy
+          const listItem = document.createElement("li"); // Tworzenie elementu listy
+          listItem.textContent = theEntireLineOfTheList; // Ustawienie tekstu elementu listy na pełne dane pracownika
+          personList.appendChild(listItem); // Dodawanie elementu listy do listy osób
+        });
         form.reset(); // Czyszczenie formularza
       });
     </script>
