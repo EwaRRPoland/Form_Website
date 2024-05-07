@@ -62,7 +62,7 @@
     <ul id="personList"></ul>
     <script>
       function areLetters(str) {
-        var pattern = /^[A-Za-z]+$/;
+        let pattern = /^[A-Za-z]+$/;
         if (str.match(pattern)) return true;
         else {
           alert("wprowadziłeś niewłaściwe dane");
@@ -73,24 +73,14 @@
       const form = document.getElementById("personForm"); // Znajdowanie formularza
       const personList = document.getElementById("personList"); // Znajdowanie listy osób
 
-      // Dodanie zdarzenia 'input' do pola 'firstName'
-      document
-        .getElementById("firstName")
-        .addEventListener("input", function (event) {
-          areLetters(event.target.value);
-        });
-      // Dodanie zdarzenia 'input' do pola 'lastName'
-      document
-        .getElementById("lastName")
-        .addEventListener("input", function (event) {
-          areLetters(event.target.value);
-        });
-      // Dodanie zdarzenia 'input' do pola 'position'
-      document
-        .getElementById("position")
-        .addEventListener("input", function (event) {
-          areLetters(event.target.value);
-        });
+      // Wyodrębniona funkcja callback
+      const checkInput = (event) => {
+        areLetters(event.target.value);
+      };
+
+      ["firstName", "lastName", "position"].forEach((id) => {
+        document.getElementById(id).addEventListener("input", checkInput);
+      });
       // Tworzenie pustej tablicy do przechowywania obiektów-pracowników
       let arrayEmployees = [];
 
