@@ -68,7 +68,7 @@
     <h2>List of added people:</h2>
     <ul id="personList"></ul>
     <script>
-      // Definiujemy funkcję Math.sum - opretator REST (...) zbiera wszystkie przekazane argumentyw  tablicę
+      // Definiujemy funkcję Math.sum - operator REST (...) zbiera wszystkie przekazane argumenty w tablicę
       Math.sum = function (...args) {
         return args.reduce((a, b) => a + b, 0);
       };
@@ -139,6 +139,13 @@
         const sumAgeElement = document.createElement("p"); // Tworzenie paragrafu
         sumAgeElement.textContent = `Zsumowany wiek pracowników: ${sumAge}`; // Ustawienie tekstu paragrafu na sumę wieku pracowników
         personList.appendChild(sumAgeElement); // Dodawanie paragrafu do listy osób
+
+        // Obliczamy średni wiek pracowników
+        let averageAge = sumAge / arrayEmployees.length;
+        // Wyświetli średni wiek wszystkich pracowników pod listą pracowników
+        const averageAgeElement = document.createElement("p"); // Tworzenie paragrafu
+        averageAgeElement.textContent = `Średni wiek pracowników: ${averageAge}`; // Ustawienie tekstu paragrafu na średni wiek pracowników
+        personList.appendChild(averageAgeElement); // Dodawanie paragrafu do listy osób
 
         form.reset(); // Czyszczenie formularza
       });
