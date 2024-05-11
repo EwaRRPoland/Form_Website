@@ -46,6 +46,13 @@
       <input type="text" id="lastName" name="lastName" required />
       <br />
       <br />
+      <!-- zapytanie o wiek pracownika - do rozbudowania -->
+
+      <label for="ageEmployee">Wiek:</label>
+      <input type="number" id="ageEmployee" name="ageEmployee" required />
+      <br />
+      <br />
+
       <label for="position">Stanowisko:</label>
       <input type="text" id="position" name="position" required />
       <br />
@@ -88,6 +95,7 @@
         event.preventDefault(); // Zapobiegamy domyślnej akcji formularza (np. przeładowania strony)
         const firstName = document.getElementById("firstName").value; // Pobieranie wartości pola "Imię"
         const lastName = document.getElementById("lastName").value; // Pobieranie wartości pola "Nazwisko"
+        const ageEmployee = document.getElementById("ageEmployee").value; // Pobieranie wartości pola "Wiek"
         const position = document.getElementById("position").value; // Pobieranie wartości pola "Stanowisko"
         const phone = document.getElementById("phone").value; // Pobieranie wartości pola "Numer telefonu"
 
@@ -95,6 +103,7 @@
         let employee = {
           imie: firstName,
           nazwisko: lastName,
+          wiek: ageEmployee,
           stanowisko: position,
           telefon: phone,
         };
@@ -114,7 +123,7 @@
         // Dodawanie posortowanych pracowników do listy na stronie
         //pętla forEach przechodzi przez posortowaną liste pracowników, co aktualizuje na nowo listę
         arrayEmployees.forEach((employee) => {
-          const theEntireLineOfTheList = `${employee.imie} ${employee.nazwisko} ${employee.stanowisko} ${employee.telefon}`;
+          const theEntireLineOfTheList = `${employee.imie} ${employee.nazwisko} ${employee.wiek} ${employee.stanowisko} ${employee.telefon}`;
           // Tworzenie pełnego wiersza listy
           const listItem = document.createElement("li"); // Tworzenie elementu listy
           listItem.textContent = theEntireLineOfTheList; // Ustawienie tekstu elementu listy na pełne dane pracownika
