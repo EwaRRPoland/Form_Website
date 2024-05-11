@@ -68,6 +68,11 @@
     <h2>List of added people:</h2>
     <ul id="personList"></ul>
     <script>
+      // Definiujemy funkcję Math.sum - opretator REST (...) zbiera wszystkie przekazane argumentyw  tablicę
+      Math.sum = function (...args) {
+        return args.reduce((a, b) => a + b, 0);
+      };
+
       function areLetters(str) {
         let pattern = /^[A-Za-z]+$/;
         if (str.match(pattern)) return true;
@@ -103,16 +108,13 @@
         let employee = {
           imie: firstName,
           nazwisko: lastName,
-          wiek: ageEmployee,
+          wiek: parseInt(ageEmployee), // Konwersja wieku na liczbę
           stanowisko: position,
           telefon: phone,
         };
 
         // Dodawanie obiektu pracownika do listy
         arrayEmployees.push(employee);
-
-        //sprawdzam sobie w konsoli
-        console.log(arrayEmployees);
 
         // Sortowanie listy pracowników alfabetycznie po nazwisku
         arrayEmployees.sort((a, b) => a.nazwisko.localeCompare(b.nazwisko));
@@ -121,7 +123,6 @@
         personList.innerHTML = "";
 
         // Dodawanie posortowanych pracowników do listy na stronie
-        //pętla forEach przechodzi przez posortowaną liste pracowników, co aktualizuje na nowo listę
         arrayEmployees.forEach((employee) => {
           const theEntireLineOfTheList = `${employee.imie} ${employee.nazwisko} ${employee.wiek} ${employee.stanowisko} ${employee.telefon}`;
           // Tworzenie pełnego wiersza listy
@@ -129,6 +130,16 @@
           listItem.textContent = theEntireLineOfTheList; // Ustawienie tekstu elementu listy na pełne dane pracownika
           personList.appendChild(listItem); // Dodawanie elementu listy do listy osób
         });
+
+        // Wyliczamy sumę wieku pracowników - operator SPREAD (...)rozbija tablicę wieków na pojedyńcze liczby
+        let sumAge = Math.sum(
+          ...arrayEmployees.map((employee) => employee.wiek)
+        );
+        // Wyświetli sumę wieku wszystkich pracowników pod listą pracowników
+        const sumAgeElement = document.createElement("p"); // Tworzenie paragrafu
+        sumAgeElement.textContent = `Zsumowany wiek pracowników: ${sumAge}`; // Ustawienie tekstu paragrafu na sumę wieku pracowników
+        personList.appendChild(sumAgeElement); // Dodawanie paragrafu do listy osób
+
         form.reset(); // Czyszczenie formularza
       });
     </script>
