@@ -73,11 +73,21 @@
         return args.reduce((a, b) => a + b, 0);
       };
 
+      //funkcja sprawdzająca czy ciąg składa sie tylko z cyfr
+      function validatePhone(telephone) {
+        let regex = /^[0-9]*$/;
+        if (telephone.match(regex)) return true;
+        else {
+          alert("Wprowadziłeś niewłasciwe dane.");
+          return false;
+        }
+      }
+
       function areLetters(str) {
         let pattern = /^[A-Za-z]+$/;
         if (str.match(pattern)) return true;
         else {
-          alert("wprowadziłeś niewłaściwe dane");
+          alert("Wprowadziłeś niewłaściwe dane.");
           return false;
         }
       }
@@ -93,6 +103,16 @@
       ["firstName", "lastName", "position"].forEach((id) => {
         document.getElementById(id).addEventListener("input", checkInput);
       });
+
+      // Wyodrębniona funkcja callback - phone
+      const checkInputPhone = (event) => {
+        validatePhone(event.target.value);
+      };
+
+      document
+        .getElementById("phone")
+        .addEventListener("input", checkInputPhone);
+
       // Tworzenie pustej tablicy do przechowywania obiektów-pracowników
       let arrayEmployees = [];
 
