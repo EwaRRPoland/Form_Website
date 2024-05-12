@@ -78,7 +78,7 @@
         let regex = /^[0-9]*$/;
         if (telephone.match(regex)) return true;
         else {
-          alert("Wprowadziłeś niewłasciwe dane.");
+          alert("Wprowadziłeś niewłasciwe dane. Wprowadz cyfrę.");
           return false;
         }
       }
@@ -87,7 +87,7 @@
         let pattern = /^[A-Za-z]+$/;
         if (str.match(pattern)) return true;
         else {
-          alert("Wprowadziłeś niewłaściwe dane.");
+          alert("Wprowadziłeś niewłaściwe dane. Wprowadz literę.");
           return false;
         }
       }
