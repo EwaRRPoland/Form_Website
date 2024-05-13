@@ -69,26 +69,27 @@
     <ul id="personList"></ul>
     <script>
       // Definiujemy funkcję Math.sum - operator REST (...) zbiera wszystkie przekazane argumenty w tablicę
+
       Math.sum = function (...args) {
         return args.reduce((a, b) => a + b, 0);
       };
 
       //funkcja sprawdzająca czy ciąg składa sie tylko z cyfr
-      function validatePhone(telephone) {
+
+      function validatePhone(event) {
         let regex = /^[0-9]*$/;
-        if (telephone.match(regex)) return true;
-        else {
+        if (!event.key.match(regex)) {
           alert("Wprowadziłeś niewłasciwe dane. Wprowadz cyfrę.");
-          return false;
+          event.preventDefault();
         }
       }
+      //funkcja sprawdzająca czy ciąg składa sie tylko z liter
 
-      function areLetters(str) {
+      function areLetters(event) {
         let pattern = /^[A-Za-z]+$/;
-        if (str.match(pattern)) return true;
-        else {
+        if (!event.key.match(pattern)) {
           alert("Wprowadziłeś niewłaściwe dane. Wprowadz literę.");
-          return false;
+          event.preventDefault();
         }
       }
 
@@ -96,22 +97,24 @@
       const personList = document.getElementById("personList"); // Znajdowanie listy osób
 
       // Wyodrębniona funkcja callback
+
       const checkInput = (event) => {
-        areLetters(event.target.value);
+        areLetters(event);
+      };
+
+      // Wyodrębniona funkcja callback - phone
+
+      const checkInputPhone = (event) => {
+        validatePhone(event);
       };
 
       ["firstName", "lastName", "position"].forEach((id) => {
-        document.getElementById(id).addEventListener("input", checkInput);
+        document.getElementById(id).addEventListener("keypress", checkInput);
       });
-
-      // Wyodrębniona funkcja callback - phone
-      const checkInputPhone = (event) => {
-        validatePhone(event.target.value);
-      };
 
       document
         .getElementById("phone")
-        .addEventListener("input", checkInputPhone);
+        .addEventListener("keypress", checkInputPhone);
 
       // Tworzenie pustej tablicy do przechowywania obiektów-pracowników
       let arrayEmployees = [];
