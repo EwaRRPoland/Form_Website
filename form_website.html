@@ -69,13 +69,11 @@
     <ul id="personList"></ul>
     <script>
       // Definiujemy funkcję Math.sum - operator REST (...) zbiera wszystkie przekazane argumenty w tablicę
-
       Math.sum = function (...args) {
         return args.reduce((a, b) => a + b, 0);
       };
 
       //funkcja sprawdzająca czy ciąg składa sie tylko z cyfr
-
       function validatePhone(event) {
         let regex = /^[0-9]*$/;
         if (!event.key.match(regex)) {
@@ -83,8 +81,8 @@
           event.preventDefault();
         }
       }
-      //funkcja sprawdzająca czy ciąg składa sie tylko z liter
 
+      //funkcja sprawdzająca czy ciąg składa sie tylko z liter
       function areLetters(event) {
         let pattern = /^[A-Za-z]+$/;
         if (!event.key.match(pattern)) {
@@ -97,13 +95,11 @@
       const personList = document.getElementById("personList"); // Znajdowanie listy osób
 
       // Wyodrębniona funkcja callback
-
       const checkInput = (event) => {
         areLetters(event);
       };
 
       // Wyodrębniona funkcja callback - phone
-
       const checkInputPhone = (event) => {
         validatePhone(event);
       };
@@ -145,14 +141,38 @@
         // Czyszczenie listy osób na stronie
         personList.innerHTML = "";
 
-        // Dodawanie posortowanych pracowników do listy na stronie
-        arrayEmployees.forEach((employee) => {
-          const theEntireLineOfTheList = `${employee.imie} ${employee.nazwisko} ${employee.wiek} ${employee.stanowisko} ${employee.telefon}`;
-          // Tworzenie pełnego wiersza listy
-          const listItem = document.createElement("li"); // Tworzenie elementu listy
-          listItem.textContent = theEntireLineOfTheList; // Ustawienie tekstu elementu listy na pełne dane pracownika
-          personList.appendChild(listItem); // Dodawanie elementu listy do listy osób
+        // Tworzenie tabeli i jej elementów
+        const table = document.createElement("table");
+        const thead = document.createElement("thead");
+        const tbody = document.createElement("tbody");
+
+        // Dodawanie nagłówków tabeli
+        const headers = ["Imię", "Nazwisko", "Wiek", "Stanowisko", "Telefon"];
+        const tr = document.createElement("tr");
+        headers.forEach((header) => {
+          const th = document.createElement("th");
+          th.textContent = header;
+          tr.appendChild(th);
         });
+        thead.appendChild(tr);
+
+        // Dodawanie posortowanych pracowników do tabeli
+        arrayEmployees.forEach((employee) => {
+          const tr = document.createElement("tr");
+          Object.values(employee).forEach((value) => {
+            const td = document.createElement("td");
+            td.textContent = value;
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+
+        // Dodawanie elementów tabeli do tabeli
+        table.appendChild(thead);
+        table.appendChild(tbody);
+
+        // Dodawanie tabeli do listy osób
+        personList.appendChild(table);
 
         // Wyliczamy sumę wieku pracowników - operator SPREAD (...)rozbija tablicę wieków na pojedyńcze liczby
         let sumAge = Math.sum(
