@@ -4,9 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Form with list</title>
-    <!--!zaimportowana biblioteka SweetAlert do projektu JavaScript aby obsłużyć
-    swal -->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
       body {
         /* sets the background as a gradient */
@@ -42,31 +39,42 @@
     <form id="personForm">
       <label for="firstName">Imię:</label>
       <input type="text" id="firstName" name="firstName" required />
+      <label id="firstNameError" style="color: red; display: none">
+        Wprowadziłeś niewłaściwe dane. Wprowadź literę.</label
+      >
       <br />
       <br />
       <label for="lastName">Nazwisko:</label>
       <input type="text" id="lastName" name="lastName" required />
+      <label id="lastNameError" style="color: red; display: none"
+        >Wprowadziłeś niewłaściwe dane. Wprowadź literę.</label
+      >
       <br />
       <br />
       <!-- zapytanie o wiek pracownika - do rozbudowania -->
-
       <label for="ageEmployee">Wiek:</label>
       <input type="number" id="ageEmployee" name="ageEmployee" required />
       <br />
       <br />
-
       <label for="position">Stanowisko:</label>
       <input type="text" id="position" name="position" required />
+      <label id="positionError" style="color: red; display: none"
+        >Wprowadziłeś niewłaściwe dane. Wprowadź literę.</label
+      >
       <br />
       <br />
       <label for="phone">Numer telefonu:</label>
       <input type="tel" id="phone" name="phone" required />
+      <label id="phoneError" style="color: red; display: none"
+        >Wprowadziłeś niewłaściwe dane. Wprowadź cyfrę.</label
+      >
       <br />
       <br />
       <p>
         <button class="button" onclick="submit">Add an employee</button>
       </p>
     </form>
+
     <h2>List of added people:</h2>
     <ul id="personList"></ul>
     <script>
@@ -75,52 +83,43 @@
         return args.reduce((a, b) => a + b, 0);
       };
 
-      //funkcja sprawdzająca czy ciąg składa sie tylko z cyfr
-      function validatePhone(event) {
-        let regex = /^[0-9]*$/;
-        if (!event.key.match(regex)) {
-          swal(
-            "Uwaga",
-            "Wprowadziłeś niewłasciwe dane. Wprowadz cyfrę.",
-            "error"
-          );
-          event.preventDefault();
-        }
-      }
-
-      //funkcja sprawdzająca czy ciąg składa sie tylko z liter
+      // funkcja sprawdzająca czy ciąg składa sie tylko z liter
       function areLetters(event) {
         let pattern = /^[A-Za-z]+$/;
+        let label = document.getElementById(event.target.id + "Error");
+
         if (!event.key.match(pattern)) {
-          swal(
-            "Uwaga",
-            "Wprowadziłeś niewłaściwe dane. Wprowadz literę.",
-            "error"
-          );
-          event.preventDefault();
+          label.style.display = "block"; // Pokazanie etykiety
+          event.preventDefault(); // Zapobieganie domyślnej akcji
+        } else {
+          label.style.display = "none"; // Ukrycie etykiety
         }
       }
 
-      const form = document.getElementById("personForm"); // Znajdowanie formularza
-      const personList = document.getElementById("personList"); // Znajdowanie listy osób
+      // funkcja sprawdzająca czy ciąg składa sie tylko z cyfr
+      function validatePhone(event) {
+        let regex = /^[0-9]*$/;
+        let label = document.getElementById(event.target.id + "Error");
 
-      // Wyodrębniona funkcja callback
-      const checkInput = (event) => {
-        areLetters(event);
-      };
+        if (!event.key.match(regex)) {
+          label.style.display = "block"; // Pokazanie etykiety
+          event.preventDefault(); // Zapobieganie domyślnej akcji
+        } else {
+          label.style.display = "none"; // Ukrycie etykiety
+        }
+      }
 
-      // Wyodrębniona funkcja callback - phone
-      const checkInputPhone = (event) => {
-        validatePhone(event);
-      };
-
+      // Dodajemy zdarzenia keypress do odpowiednich pól
       ["firstName", "lastName", "position"].forEach((id) => {
-        document.getElementById(id).addEventListener("keypress", checkInput);
+        document.getElementById(id).addEventListener("keypress", areLetters);
       });
 
       document
         .getElementById("phone")
-        .addEventListener("keypress", checkInputPhone);
+        .addEventListener("keypress", validatePhone);
+
+      const form = document.getElementById("personForm"); // Znajdowanie formularza
+      const personList = document.getElementById("personList"); // Znajdowanie listy osób
 
       // Tworzenie pustej tablicy do przechowywania obiektów-pracowników
       let arrayEmployees = [];
