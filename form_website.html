@@ -51,14 +51,36 @@
 }
       .personForm {
         width: 50%;
-        /* Dodaj tutaj dodatkowe style dla formularza */
       }
-      .personList {
-        width: 50%;
-        padding: 10px;
-        border-left: 1px solid #ccc;
-      }
-      /* Dodaj tutaj dodatkowe style dla listy pracowników */
+     
+/*Tutaj dodatkowe style dla listy pracowników */
+.personList {
+  width: 50%;
+  padding: 10px;
+  border-left: 1px solid #ccc;
+}
+
+.personList table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.personList th, .personList td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.personList tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.personList th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(87, 76, 194);
+  color: white;
+}
       label {
         display: block;
         font-weight: bold;
