@@ -32,49 +32,68 @@
       .button:hover {
         background-color: rgb(87, 76, 194);
       }
+      /*poprawienie wyglądu pola do wprowadzania danych - formularz*/
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #fff;
+        border: 1px solid;
+        padding: 15px;
+        border-radius: 15px 15px;
+      }
+      label {
+        display: block;
+        font-weight: bold;
+      }
+      input {
+        box-shadow: 4px 4px 2px #ccc;
+        border: 1px solid;
+        padding: 5px;
+      }
     </style>
   </head>
   <body>
-    <h1>Form for adding people:</h1>
-    <form id="personForm">
-      <label for="firstName">Imię:</label>
-      <input type="text" id="firstName" name="firstName" required />
-      <label id="firstNameError" style="color: red; display: none">
-        Wprowadziłeś niewłaściwe dane. Wprowadź literę.</label
-      >
-      <br />
-      <br />
-      <label for="lastName">Nazwisko:</label>
-      <input type="text" id="lastName" name="lastName" required />
-      <label id="lastNameError" style="color: red; display: none"
-        >Wprowadziłeś niewłaściwe dane. Wprowadź literę.</label
-      >
-      <br />
-      <br />
-      <!-- zapytanie o wiek pracownika - do rozbudowania -->
-      <label for="ageEmployee">Wiek:</label>
-      <input type="number" id="ageEmployee" name="ageEmployee" required />
-      <br />
-      <br />
-      <label for="position">Stanowisko:</label>
-      <input type="text" id="position" name="position" required />
-      <label id="positionError" style="color: red; display: none"
-        >Wprowadziłeś niewłaściwe dane. Wprowadź literę.</label
-      >
-      <br />
-      <br />
-      <label for="phone">Numer telefonu:</label>
-      <input type="tel" id="phone" name="phone" required />
-      <label id="phoneError" style="color: red; display: none"
-        >Wprowadziłeś niewłaściwe dane. Wprowadź cyfrę.</label
-      >
-      <br />
-      <br />
-      <p>
-        <button class="button" onclick="submit">Add an employee</button>
-      </p>
-    </form>
-
+    <h1 style="text-align: center">Form for adding people:</h1>
+    <div class="container">
+      <form id="personForm">
+        <label for="firstName">Imię:</label>
+        <input type="text" id="firstName" name="firstName" required /><br />
+        <label id="firstNameError" style="color: red; display: none">
+          Wprowadziłeś niewłaściwe dane. Wprowadź literę.</label
+        >
+        <br />
+        <label for="lastName">Nazwisko:</label>
+        <input type="text" id="lastName" name="lastName" required /><br />
+        <label id="lastNameError" style="color: red; display: none"
+          >Wprowadziłeś niewłaściwe dane. Wprowadź literę.</label
+        >
+        <br />
+        <!-- zapytanie o wiek pracownika - do rozbudowania -->
+        <label for="ageEmployee">Wiek:</label>
+        <input
+          type="number"
+          id="ageEmployee"
+          name="ageEmployee"
+          required
+        /><br />
+        <br />
+        <label for="position">Stanowisko:</label>
+        <input type="text" id="position" name="position" required /><br />
+        <label id="positionError" style="color: red; display: none"
+          >Wprowadziłeś niewłaściwe dane. Wprowadź literę.</label
+        >
+        <br />
+        <label for="phone">Numer telefonu:</label>
+        <input type="tel" id="phone" name="phone" required /><br />
+        <label id="phoneError" style="color: red; display: none"
+          >Wprowadziłeś niewłaściwe dane. Wprowadź cyfrę.</label
+        >
+        <br />
+        <p>
+          <button class="button" onclick="submit">Add an employee</button>
+        </p>
+      </form>
+    </div>
     <h2>List of added people:</h2>
     <ul id="personList"></ul>
     <script>
