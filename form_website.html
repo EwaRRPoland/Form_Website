@@ -12,6 +12,8 @@
           rgb(133, 133, 233),
           rgb(240, 242, 243)
         );
+        display: flex;
+      justify-content: space-between;
       }
       /* style for HTML elements with the .button class */
       .button {
@@ -31,16 +33,32 @@
       }
       .button:hover {
         background-color: rgb(87, 76, 194);
+      }    
+.leftContainer {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.formContainer {
+  flex: 1;
+  width: 50%;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid;
+  padding: 15px;
+  border-radius: 15px 15px;
+}
+      .personForm {
+        width: 50%;
+        /* Dodaj tutaj dodatkowe style dla formularza */
       }
-      /*poprawienie wyglądu pola do wprowadzania danych - formularz*/
-      .container {
-        max-width: 600px;
-        margin: 0 auto;
-        background: #fff;
-        border: 1px solid;
-        padding: 15px;
-        border-radius: 15px 15px;
+      .personList {
+        width: 50%;
+        padding: 10px;
+        border-left: 1px solid #ccc;
       }
+      /* Dodaj tutaj dodatkowe style dla listy pracowników */
       label {
         display: block;
         font-weight: bold;
@@ -52,9 +70,12 @@
       }
     </style>
   </head>
-  <body>
+  <div class="leftContainer">
     <h1 style="text-align: center">Form for adding people:</h1>
-    <div class="container">
+ 
+  <div class="formContainer">
+    
+    <div class="personForm">
       <form id="personForm">
         <label for="firstName">Imię:</label>
         <input type="text" id="firstName" name="firstName" required /><br />
@@ -64,8 +85,8 @@
         <br />
         <label for="lastName">Nazwisko:</label>
         <input type="text" id="lastName" name="lastName" required /><br />
-        <label id="lastNameError" style="color: red; display: none"
-          >Wprowadziłeś niewłaściwe dane. Wprowadź literę.</label
+        <label id="lastNameError" style="color: red; display: none">
+          Wprowadziłeś niewłaściwe dane. Wprowadź literę.</label
         >
         <br />
         <!-- zapytanie o wiek pracownika - do rozbudowania -->
@@ -79,14 +100,14 @@
         <br />
         <label for="position">Stanowisko:</label>
         <input type="text" id="position" name="position" required /><br />
-        <label id="positionError" style="color: red; display: none"
-          >Wprowadziłeś niewłaściwe dane. Wprowadź literę.</label
+        <label id="positionError" style="color: red; display: none">
+          Wprowadziłeś niewłaściwe dane. Wprowadź literę.</label
         >
         <br />
         <label for="phone">Numer telefonu:</label>
         <input type="tel" id="phone" name="phone" required /><br />
-        <label id="phoneError" style="color: red; display: none"
-          >Wprowadziłeś niewłaściwe dane. Wprowadź cyfrę.</label
+        <label id="phoneError" style="color: red; display: none">
+          Wprowadziłeś niewłaściwe dane. Wprowadź cyfrę.</label
         >
         <br />
         <p>
@@ -94,8 +115,14 @@
         </p>
       </form>
     </div>
-    <h2>List of added people:</h2>
-    <ul id="personList"></ul>
+  </div>
+ </div>
+   
+    <div class="personList">
+      <h2>List of added people:</h2>
+      <ul id="personList"></ul>
+    </div>
+  
     <script>
       // Definiujemy funkcję Math.sum - operator REST (...) zbiera wszystkie przekazane argumenty w tablicę
       Math.sum = function (...args) {
