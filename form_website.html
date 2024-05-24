@@ -211,7 +211,7 @@
 
         // Dodawanie obiektu pracownika do listy
         arrayEmployees.push(employee);
-
+       
         // Sortowanie listy pracowników alfabetycznie po nazwisku
         arrayEmployees.sort((a, b) => a.nazwisko.localeCompare(b.nazwisko));
 
@@ -259,6 +259,25 @@
         const sumAgeElement = document.createElement("p"); // Tworzenie paragrafu
         sumAgeElement.textContent = `Zsumowany wiek pracowników: ${sumAge}`; // Ustawienie tekstu paragrafu na sumę wieku pracowników
         personList.appendChild(sumAgeElement); // Dodawanie paragrafu do listy osób
+        
+        // Wyliczamy najwyższy wiek pracowników - operator SPREAD (...)rozbija tablicę wieków na pojedyńcze liczby
+        let highestAge = Math.max(
+          ...arrayEmployees.map((employee) => employee.wiek)
+        );
+        //zmienna highestAge jest zapisana w sessionStorage pod kluczem najwyzszyWiek
+sessionStorage.setItem('najwyzszyWiek', highestAge.toString());
+//zmienna highestAge jest zapisana w sessionStorage pod kluczem najwyzszyWiek. 
+//Można ją później odczytać za pomocą metody getItem()
+//zwrócona wartość będzie ciągiem, więc trzeba ją ponownie przekształcić na liczbę. Robimy to za pomocą funkcji Number()
+let storedAgeNumber = Number(sessionStorage.getItem('najwyzszyWiek'));
+
+        // Wyświetli najwyższy wiek z wszystkich pracowników pod listą pracowników
+        const highestAgeElement = document.createElement("p"); // Tworzenie paragrafu
+        highestAgeElement.textContent = `Najwyższy wiek wśród pracowników: ${highestAge}`; // Ustawienie tekstu paragrafu na najwyższy wiek z pracowników
+        personList.appendChild(highestAgeElement); // Dodawanie paragrafu do listy osób
+
+        // Dodajemy kod do wyświetlenia wartości najwyzszyWiek z sessionStorage w konsoli
+console.log('Wartość najwyzszyWiek zapisana w sessionStorage to: ', sessionStorage.getItem('najwyzszyWiek'));
 
         // Obliczamy średni wiek pracowników
         let averageAge = sumAge / arrayEmployees.length;
