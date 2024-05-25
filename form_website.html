@@ -209,6 +209,18 @@
           telefon: phone,
         };
 
+//**// Sprawdzamy, czy wiek nowo dodanego pracownika jest wyższy od obecnego najwyższego wieku
+let storedAge = sessionStorage.getItem('najwyzszyWiek');
+if (storedAge) {
+  storedAge = Number(storedAge);
+  if (employee.wiek > storedAge) {
+    // Jeśli tak, to aktualizujemy najwyższy wiek w sessionStorage
+    sessionStorage.setItem('najwyzszyWiek', employee.wiek.toString());
+  }
+} else {
+  // Jeśli w sessionStorage nie ma zapisanego najwyższego wieku, to zapisujemy wiek nowo dodanego pracownika
+  sessionStorage.setItem('najwyzszyWiek', employee.wiek.toString());
+}
         // Dodawanie obiektu pracownika do listy
         arrayEmployees.push(employee);
        
@@ -264,19 +276,22 @@
         let highestAge = Math.max(
           ...arrayEmployees.map((employee) => employee.wiek)
         );
-        //zmienna highestAge jest zapisana w sessionStorage pod kluczem najwyzszyWiek
-sessionStorage.setItem('najwyzszyWiek', highestAge.toString());
-//zmienna highestAge jest zapisana w sessionStorage pod kluczem najwyzszyWiek. 
-//Można ją później odczytać za pomocą metody getItem()
-//zwrócona wartość będzie ciągiem, więc trzeba ją ponownie przekształcić na liczbę. Robimy to za pomocą funkcji Number()
-let storedAgeNumber = Number(sessionStorage.getItem('najwyzszyWiek'));
 
-        // Wyświetli najwyższy wiek z wszystkich pracowników pod listą pracowników
-        const highestAgeElement = document.createElement("p"); // Tworzenie paragrafu
-        highestAgeElement.textContent = `Najwyższy wiek wśród pracowników: ${highestAge}`; // Ustawienie tekstu paragrafu na najwyższy wiek z pracowników
-        personList.appendChild(highestAgeElement); // Dodawanie paragrafu do listy osób
+//**// Wyświetli najwyższy wiek z wszystkich pracowników pod listą pracowników
+const highestAgeElement = document.createElement("p"); // Tworzenie paragrafu
 
-        // Dodajemy kod do wyświetlenia wartości najwyzszyWiek z sessionStorage w konsoli
+
+// *Sprawdzamy, czy w sessionStorage jest zapisany najwyższy wiek
+if (sessionStorage.getItem('najwyzszyWiek')) {
+  // Jeśli tak, to ustawiamy najwyższy wiek na wartość zapisaną w sessionStorage
+  highestAge = Number(sessionStorage.getItem('najwyzszyWiek'));
+}
+
+
+highestAgeElement.textContent = `Najwyższy wiek wśród pracowników: ${highestAge}`; // Ustawienie tekstu paragrafu na najwyższy wiek z pracowników
+personList.appendChild(highestAgeElement); // Dodawanie paragrafu do listy osób
+
+// Dodajemy kod do wyświetlenia wartości najwyzszyWiek z sessionStorage w konsoli
 console.log('Wartość najwyzszyWiek zapisana w sessionStorage to: ', sessionStorage.getItem('najwyzszyWiek'));
 
         // Obliczamy średni wiek pracowników
@@ -286,7 +301,9 @@ console.log('Wartość najwyzszyWiek zapisana w sessionStorage to: ', sessionSto
         averageAgeElement.textContent = `Średni wiek pracowników: ${averageAge}`; // Ustawienie tekstu paragrafu na średni wiek pracowników
         personList.appendChild(averageAgeElement); // Dodawanie paragrafu do listy osób
 
+
         form.reset(); // Czyszczenie formularza
+
       });
     </script>
   </body>
