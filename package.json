@@ -8,7 +8,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "parcel form_website.html",
-    "build": "parcel build dist/form_website.html --public-url /Form_Website/",
+    "build": "parcel build form_website.html --public-url /Form_Website/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ewa Rostecka-Rzonca",
