@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with list</title>
+    <style>body {
+        /* sets the background as a gradient */
+        background: linear-gradient(
+          to right,
+          rgb(133, 133, 233),
+          rgb(240, 242, 243)
+        );
+        display: flex;
+      justify-content: space-between;
+      }
+      /* style for HTML elements with the .button class */
+      .button {
+        /* sets the width 150 and height of the button to 50 pixels */
+        width: 150px;
+        height: 50px;
+        /* sets the font size to 25 pixels */
+        font-size: 20px;
+        /* adds a margin of 2 pixels around the button */
+        margin: 2px;
+        /* changes the cursor to a pointer -hand with pointing finger- when the user hovers over the button */
+        cursor: pointer;
+        /* rounds the corners of the buttons */
+        border-radius: 10px;
+        /* changes the background color of the button to red when hovered */
+        transition: background-color 0.3s ease;
+      }
+      .button:hover {
+        background-color: rgb(87, 76, 194);
+      }    
+.leftContainer {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.formContainer {
+  flex: 1;
+  width: 50%;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid;
+  padding: 15px;
+  border-radius: 15px 15px;
+}
+      .personForm {
+        width: 50%;
+      }
+     
+/*Tutaj dodatkowe style dla listy pracowników */
+.personList {
+  width: 50%;
+  padding: 10px;
+  border-left: 1px solid #ccc;
+}
+
+.personList table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.personList th, .personList td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.personList tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.personList th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(87, 76, 194);
+  color: white;
+}
+      label {
+        display: block;
+        font-weight: bold;
+      }
+      input {
+        box-shadow: 4px 4px 2px #ccc;
+        border: 1px solid;
+        padding: 5px;
+      }</style>
+  </head>
+  <div class="leftContainer">
+    <h1 style="text-align: center">Form for adding people:</h1>
+ 
+  <div class="formContainer">
+    
+    <div class="personForm">
+      <form id="personForm">
+        <label for="firstName">Imię:</label>
+        <input type="text" id="firstName" name="firstName" required=""><br>
+        <label id="firstNameError" style="color: red; display: none">
+          Wprowadziłeś niewłaściwe dane. Wprowadź literę.</label>
+        <br>
+        <label for="lastName">Nazwisko:</label>
+        <input type="text" id="lastName" name="lastName" required=""><br>
+        <label id="lastNameError" style="color: red; display: none">
+          Wprowadziłeś niewłaściwe dane. Wprowadź literę.</label>
+        <br>
+        <!-- zapytanie o wiek pracownika - do rozbudowania -->
+        <label for="ageEmployee">Wiek:</label>
+        <input type="number" id="ageEmployee" name="ageEmployee" required=""><br>
+        <br>
+        <label for="position">Stanowisko:</label>
+        <input type="text" id="position" name="position" required=""><br>
+        <label id="positionError" style="color: red; display: none">
+          Wprowadziłeś niewłaściwe dane. Wprowadź literę.</label>
+        <br>
+        <label for="phone">Numer telefonu:</label>
+        <input type="tel" id="phone" name="phone" required=""><br>
+        <label id="phoneError" style="color: red; display: none">
+          Wprowadziłeś niewłaściwe dane. Wprowadź cyfrę.</label>
+        <br>
+        <p>
+          <button class="button" onclick="submit">Add an employee</button>
+        </p>
+      </form>
+    </div>
+  </div>
+ </div>
+   
+    <div class="personList">
+      <h2>List of added people:</h2>
+      <ul id="personList"></ul>
+    </div>
+  
+    <script>function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+// Definiujemy funkcję Math.sum - operator REST (...) zbiera wszystkie przekazane argumenty w tablicę
+Math.sum = function () {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+  return args.reduce(function (a, b) {
+    return a + b;
+  }, 0);
+};
+
+// funkcja sprawdzająca czy ciąg składa sie tylko z liter
+function areLetters(event) {
+  var pattern = /^[A-Za-z]+$/;
+  var label = document.getElementById(event.target.id + "Error");
+  if (!event.key.match(pattern)) {
+    label.style.display = "block"; // Pokazanie etykiety
+    event.preventDefault(); // Zapobieganie domyślnej akcji
+  } else {
+    label.style.display = "none"; // Ukrycie etykiety
+  }
+}
+
+// funkcja sprawdzająca czy ciąg składa sie tylko z cyfr
+function validatePhone(event) {
+  var regex = /^[0-9]*$/;
+  var label = document.getElementById(event.target.id + "Error");
+  if (!event.key.match(regex)) {
+    label.style.display = "block"; // Pokazanie etykiety
+    event.preventDefault(); // Zapobieganie domyślnej akcji
+  } else {
+    label.style.display = "none"; // Ukrycie etykiety
+  }
+}
+
+// Dodajemy zdarzenia keypress do odpowiednich pól
+["firstName", "lastName", "position"].forEach(function (id) {
+  document.getElementById(id).addEventListener("keypress", areLetters);
+});
+document.getElementById("phone").addEventListener("keypress", validatePhone);
+var form = document.getElementById("personForm"); // Znajdowanie formularza
+var personList = document.getElementById("personList"); // Znajdowanie listy osób
+
+// Tworzenie pustej tablicy do przechowywania obiektów-pracowników
+var arrayEmployees = [];
+form.addEventListener("submit", function (event) {
+  event.preventDefault(); // Zapobiegamy domyślnej akcji formularza (np. przeładowania strony)
+  var firstName = document.getElementById("firstName").value; // Pobieranie wartości pola "Imię"
+  var lastName = document.getElementById("lastName").value; // Pobieranie wartości pola "Nazwisko"
+  var ageEmployee = document.getElementById("ageEmployee").value; // Pobieranie wartości pola "Wiek"
+  var position = document.getElementById("position").value; // Pobieranie wartości pola "Stanowisko"
+  var phone = document.getElementById("phone").value; // Pobieranie wartości pola "Numer telefonu"
+
+  // Tworzenie obiektu pracownika
+  var employee = {
+    imie: firstName,
+    nazwisko: lastName,
+    wiek: parseInt(ageEmployee),
+    // Konwersja wieku na liczbę
+    stanowisko: position,
+    telefon: phone
+  };
+
+  //**// Sprawdzamy, czy wiek nowo dodanego pracownika jest wyższy od obecnego najwyższego wieku
+  var storedAge = sessionStorage.getItem('najwyzszyWiek');
+  if (storedAge) {
+    storedAge = Number(storedAge);
+    if (employee.wiek > storedAge) {
+      // Jeśli tak, to aktualizujemy najwyższy wiek w sessionStorage
+      sessionStorage.setItem('najwyzszyWiek', employee.wiek.toString());
+    }
+  } else {
+    // Jeśli w sessionStorage nie ma zapisanego najwyższego wieku, to zapisujemy wiek nowo dodanego pracownika
+    sessionStorage.setItem('najwyzszyWiek', employee.wiek.toString());
+  }
+  // Dodawanie obiektu pracownika do listy
+  arrayEmployees.push(employee);
+
+  // Sortowanie listy pracowników alfabetycznie po nazwisku
+  arrayEmployees.sort(function (a, b) {
+    return a.nazwisko.localeCompare(b.nazwisko);
+  });
+
+  // Czyszczenie listy osób na stronie
+  personList.innerHTML = "";
+
+  // Tworzenie tabeli i jej elementów
+  var table = document.createElement("table");
+  var thead = document.createElement("thead");
+  var tbody = document.createElement("tbody");
+
+  // Dodawanie nagłówków tabeli
+  var headers = ["Imię", "Nazwisko", "Wiek", "Stanowisko", "Telefon"];
+  var tr = document.createElement("tr");
+  headers.forEach(function (header) {
+    var th = document.createElement("th");
+    th.textContent = header;
+    tr.appendChild(th);
+  });
+  thead.appendChild(tr);
+
+  // Dodawanie posortowanych pracowników do tabeli
+  arrayEmployees.forEach(function (employee) {
+    var tr = document.createElement("tr");
+    Object.values(employee).forEach(function (value) {
+      var td = document.createElement("td");
+      td.textContent = value;
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+
+  // Dodawanie elementów tabeli do tabeli
+  table.appendChild(thead);
+  table.appendChild(tbody);
+
+  // Dodawanie tabeli do listy osób
+  personList.appendChild(table);
+
+  // Wyliczamy sumę wieku pracowników - operator SPREAD (...)rozbija tablicę wieków na pojedyńcze liczby
+  var sumAge = Math.sum.apply(Math, _toConsumableArray(arrayEmployees.map(function (employee) {
+    return employee.wiek;
+  })));
+  // Wyświetli sumę wieku wszystkich pracowników pod listą pracowników
+  var sumAgeElement = document.createElement("p"); // Tworzenie paragrafu
+  sumAgeElement.textContent = "Zsumowany wiek pracownik\xF3w: ".concat(sumAge); // Ustawienie tekstu paragrafu na sumę wieku pracowników
+  personList.appendChild(sumAgeElement); // Dodawanie paragrafu do listy osób
+
+  // Wyliczamy najwyższy wiek pracowników - operator SPREAD (...)rozbija tablicę wieków na pojedyńcze liczby
+  var highestAge = Math.max.apply(Math, _toConsumableArray(arrayEmployees.map(function (employee) {
+    return employee.wiek;
+  })));
+
+  //**// Wyświetli najwyższy wiek z wszystkich pracowników pod listą pracowników
+  var highestAgeElement = document.createElement("p"); // Tworzenie paragrafu
+
+  // *Sprawdzamy, czy w sessionStorage jest zapisany najwyższy wiek
+  if (sessionStorage.getItem('najwyzszyWiek')) {
+    // Jeśli tak, to ustawiamy najwyższy wiek na wartość zapisaną w sessionStorage
+    highestAge = Number(sessionStorage.getItem('najwyzszyWiek'));
+  }
+  highestAgeElement.textContent = "Najwy\u017Cszy wiek w\u015Br\xF3d pracownik\xF3w: ".concat(highestAge); // Ustawienie tekstu paragrafu na najwyższy wiek z pracowników
+  personList.appendChild(highestAgeElement); // Dodawanie paragrafu do listy osób
+
+  // Dodajemy kod do wyświetlenia wartości najwyzszyWiek z sessionStorage w konsoli
+  console.log('Wartość najwyzszyWiek zapisana w sessionStorage to: ', sessionStorage.getItem('najwyzszyWiek'));
+
+  // Obliczamy średni wiek pracowników
+  var averageAge = sumAge / arrayEmployees.length;
+  // Wyświetli średni wiek wszystkich pracowników pod listą pracowników
+  var averageAgeElement = document.createElement("p"); // Tworzenie paragrafu
+  averageAgeElement.textContent = "\u015Aredni wiek pracownik\xF3w: ".concat(averageAge); // Ustawienie tekstu paragrafu na średni wiek pracowników
+  personList.appendChild(averageAgeElement); // Dodawanie paragrafu do listy osób
+
+  form.reset(); // Czyszczenie formularza
+});</script>
+  
+</html>

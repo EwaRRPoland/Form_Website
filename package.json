@@ -1,0 +1,21 @@
+{
+  "name": "form_website",
+  "version": "1.0.0",
+  "description": "Simple page with form and list.",
+  "main": "form_website.html",
+  "homepage": "https://EwaRRPoland.github.io/Form_Website/",
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "parcel form_website.html",
+    "build": "parcel build form_website.html --public-url /Form_Website/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ewa Rostecka-Rzonca",
+  "license": "ISC",
+  "devDependencies": {
+    "gh-pages": "^6.1.1",
+    "parcel-bundler": "^1.12.5",
+    "save": "^2.9.0"
+  }
+}
